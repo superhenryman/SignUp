@@ -11,6 +11,24 @@ def get_db_connection():
     )
     return conn
 
+def init_db():
+    try:
+        conn = get_db_connection()
+        if conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS users (
+                        id SERIAL PRIMARY KEY,
+                        username VARCHAR(255) NOT NULL,
+                        password VARCHAR(255) NOT NULL
+                    );
+                """)
+                conn.commit()  # Commit only if the query runs successfully
+    except Exception as e:
+        flash(f"Error initializing the database: {e}", "danger")
+    finally:
+        if conn:
+            conn.close()
 app = Flask(__name__)
 port = int(os.getenv("PORT", 5000))
 @app.route("/", methods=["POST", "GET"])
