@@ -4,9 +4,9 @@ import hash #custom library to hash using hash.hash_text(data)
 import os
 def get_db_connection():
     conn = psycopg2.connect(
-        host=os.getenv("host")
-        database=os.getenv("database")
-        user=os.getenv("user")
+        host=os.getenv("host"),
+        database=os.getenv("database"),
+        user=os.getenv("user"),
         password=os.getenv("password")
     )
     return conn
