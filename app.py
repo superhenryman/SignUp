@@ -12,7 +12,7 @@ def get_db_connection():
     return conn
 
 app = Flask(__name__)
-
+port = int(os.getenv("PORT", 5000))
 @app.route("/", methods=["POST", "GET"])
 
 def signup():
@@ -33,4 +33,4 @@ def signup():
         #include captcha
     return render_template("index.html")
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
