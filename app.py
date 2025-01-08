@@ -30,7 +30,9 @@ def init_db():
         if conn:
             conn.close()
 init_db()
+
 app = Flask(__name__)
+app.secret_key = os.getenv("secret")
 port = int(os.getenv("PORT", 5000))
 @app.route("/", methods=["POST", "GET"])
 
