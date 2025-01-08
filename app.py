@@ -29,10 +29,11 @@ def init_db():
     finally:
         if conn:
             conn.close()
+init_db()
 app = Flask(__name__)
 port = int(os.getenv("PORT", 5000))
 @app.route("/", methods=["POST", "GET"])
-init_db()
+
 def signup():
     if request.method == "POST":
         username = request.form.get("username")
